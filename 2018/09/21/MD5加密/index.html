@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="1.安装mysql：123456docker pull mysql:5.5docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tagsome-mysql： 容器别名my-secret-pw：初始化设置的root用户的密码tag：mysql的版本，不写默认使用最新版-p 3306">
+<meta name="description" content="MD5工具类：123456789101112131415161718192021222324252627282930313233import java.security.MessageDigest;/** * MD5加密 */public class MD5Utils &amp;#123;    public static String md5(String s) &amp;#123;        char h">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker安装mysql、nginx和gogs">
-<meta property="og:url" content="https://lichujun.gitee.io/blog/2018/09/14/Docker安装mysql、nginx和gogs/index.html">
+<meta property="og:title" content="MD5加密">
+<meta property="og:url" content="https://lichujun.gitee.io/blog/2018/09/21/MD5加密/index.html">
 <meta property="og:site_name" content="十仔的博客">
-<meta property="og:description" content="1.安装mysql：123456docker pull mysql:5.5docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tagsome-mysql： 容器别名my-secret-pw：初始化设置的root用户的密码tag：mysql的版本，不写默认使用最新版-p 3306">
+<meta property="og:description" content="MD5工具类：123456789101112131415161718192021222324252627282930313233import java.security.MessageDigest;/** * MD5加密 */public class MD5Utils &amp;#123;    public static String md5(String s) &amp;#123;        char h">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-17T00:51:28.613Z">
+<meta property="og:updated_time" content="2018-09-21T08:11:27.814Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker安装mysql、nginx和gogs">
-<meta name="twitter:description" content="1.安装mysql：123456docker pull mysql:5.5docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tagsome-mysql： 容器别名my-secret-pw：初始化设置的root用户的密码tag：mysql的版本，不写默认使用最新版-p 3306">
+<meta name="twitter:title" content="MD5加密">
+<meta name="twitter:description" content="MD5工具类：123456789101112131415161718192021222324252627282930313233import java.security.MessageDigest;/** * MD5加密 */public class MD5Utils &amp;#123;    public static String md5(String s) &amp;#123;        char h">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://lichujun.gitee.io/blog/2018/09/14/Docker安装mysql、nginx和gogs/"/>
+  <link rel="canonical" href="https://lichujun.gitee.io/blog/2018/09/21/MD5加密/"/>
 
 
 
 
 
-  <title>Docker安装mysql、nginx和gogs | 十仔的博客</title>
+  <title>MD5加密 | 十仔的博客</title>
   
 
 
@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/14/Docker安装mysql、nginx和gogs/">
+    <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/21/MD5加密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lichujun">
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker安装mysql、nginx和gogs</h1>
+          <h1 class="post-title" itemprop="name headline">MD5加密</h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T23:23:33+08:00">
-                2018-09-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T16:10:45+08:00">
+                2018-09-21
               </time>
             
 
@@ -301,9 +301,7 @@
       
 
       
-        <p>1.安装mysql：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysq<span class="variable">l:5</span>.<span class="number">5</span></span><br><span class="line">docker run --name some-mysql -<span class="keyword">p</span> <span class="number">3306</span>:<span class="number">3306</span> -<span class="keyword">e</span> MYSQL_ROOT_PASSWORD=my-secret-<span class="keyword">pw</span> -d mysq<span class="variable">l:tag</span></span><br><span class="line">some-mysql： 容器别名</span><br><span class="line">my-secret-<span class="keyword">pw</span>：初始化设置的root用户的密码</span><br><span class="line"><span class="keyword">tag</span>：mysql的版本，不写默认使用最新版</span><br><span class="line">-<span class="keyword">p</span> <span class="number">3306</span>:<span class="number">3306</span>：表示在这个容器中使用<span class="number">3306</span>端口(第二个)映射到本机的端口号也为<span class="number">3306</span>(第一个)</span><br></pre></td></tr></table></figure></p>
-<p>2.安装nginx：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull <span class="variable">$&#123;nginx</span>:<span class="keyword">version</span>&#125;</span><br><span class="line">docker <span class="keyword">run</span> -it -p 80:80 <span class="variable">$&#123;nginx</span>:<span class="keyword">version</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.安装gogs：<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull gogs/gogs</span><br><span class="line">docker <span class="keyword">run</span><span class="bash"> -d -p 3000:3000 gogs/gogs</span></span><br></pre></td></tr></table></figure></p>
+        <p>MD5工具类：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * MD5加密</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> class MD5Utils &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> md5(<span class="keyword">String</span> s) &#123;</span><br><span class="line">        <span class="built_in">char</span> hexDigits[] = &#123; <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>,</span><br><span class="line">                <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span> &#125;;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">byte</span>[] btInput = s.getBytes();</span><br><span class="line">            <span class="comment">// 获得MD5摘要算法的 MessageDigest 对象</span></span><br><span class="line">            MessageDigest mdInst = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">            <span class="comment">// 使用指定的字节更新摘要</span></span><br><span class="line">            mdInst.update(btInput);</span><br><span class="line">            <span class="comment">// 获得密文</span></span><br><span class="line">            <span class="built_in">byte</span>[] md = mdInst.digest();</span><br><span class="line">            <span class="comment">// 把密文转换成十六进制的字符串形式</span></span><br><span class="line">            <span class="built_in">int</span> j = md.length;</span><br><span class="line">            <span class="built_in">char</span> <span class="built_in">str</span>[] = <span class="keyword">new</span> <span class="built_in">char</span>[j * <span class="number">2</span>];</span><br><span class="line">            <span class="built_in">int</span> k = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">byte</span> byte0 : md) &#123;</span><br><span class="line">                <span class="built_in">str</span>[k++] = hexDigits[byte0 &gt;&gt;&gt; <span class="number">4</span> &amp; <span class="number">0xf</span>];</span><br><span class="line">                <span class="built_in">str</span>[k++] = hexDigits[byte0 &amp; <span class="number">0xf</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">String</span>(<span class="built_in">str</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -328,8 +326,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/09/14/安装Brook和Shadowsocks/" rel="next" title="安装Brook和Shadowsocks ">
-                <i class="fa fa-chevron-left"></i> 安装Brook和Shadowsocks 
+              <a href="/blog/2018/09/21/HttpClient工具类/" rel="next" title="HttpClient工具类">
+                <i class="fa fa-chevron-left"></i> HttpClient工具类
               </a>
             
           </div>
@@ -337,10 +335,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/09/14/利用枚举类实现单例模式/" rel="prev" title="利用枚举类实现单例模式">
-                利用枚举类实现单例模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

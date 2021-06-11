@@ -81,17 +81,13 @@
 
 
 
-<meta name="description" content="1.安装mysql：123456docker pull mysql:5.5docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tagsome-mysql： 容器别名my-secret-pw：初始化设置的root用户的密码tag：mysql的版本，不写默认使用最新版-p 3306">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Docker安装mysql、nginx和gogs">
-<meta property="og:url" content="https://lichujun.gitee.io/blog/2018/09/14/Docker安装mysql、nginx和gogs/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="十仔的博客">
+<meta property="og:url" content="https://lichujun.gitee.io/blog/page/3/index.html">
 <meta property="og:site_name" content="十仔的博客">
-<meta property="og:description" content="1.安装mysql：123456docker pull mysql:5.5docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tagsome-mysql： 容器别名my-secret-pw：初始化设置的root用户的密码tag：mysql的版本，不写默认使用最新版-p 3306">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-17T00:51:28.613Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker安装mysql、nginx和gogs">
-<meta name="twitter:description" content="1.安装mysql：123456docker pull mysql:5.5docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tagsome-mysql： 容器别名my-secret-pw：初始化设置的root用户的密码tag：mysql的版本，不写默认使用最新版-p 3306">
+<meta name="twitter:title" content="十仔的博客">
 
 
 
@@ -121,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="https://lichujun.gitee.io/blog/2018/09/14/Docker安装mysql、nginx和gogs/"/>
+  <link rel="canonical" href="https://lichujun.gitee.io/blog/page/3/"/>
 
 
 
 
 
-  <title>Docker安装mysql、nginx和gogs | 十仔的博客</title>
+  <title>十仔的博客</title>
   
 
 
@@ -146,7 +142,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,9 +216,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -234,7 +231,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/14/Docker安装mysql、nginx和gogs/">
+    <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/14/IDEA常用快捷键/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lichujun">
@@ -251,7 +248,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker安装mysql、nginx和gogs</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/09/14/IDEA常用快捷键/" itemprop="url">IDEA常用快捷键 </a></h1>
         
 
         <div class="post-meta">
@@ -263,7 +262,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T23:23:33+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T22:51:55+08:00">
                 2018-09-14
               </time>
             
@@ -301,10 +300,12 @@
       
 
       
-        <p>1.安装mysql：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysq<span class="variable">l:5</span>.<span class="number">5</span></span><br><span class="line">docker run --name some-mysql -<span class="keyword">p</span> <span class="number">3306</span>:<span class="number">3306</span> -<span class="keyword">e</span> MYSQL_ROOT_PASSWORD=my-secret-<span class="keyword">pw</span> -d mysq<span class="variable">l:tag</span></span><br><span class="line">some-mysql： 容器别名</span><br><span class="line">my-secret-<span class="keyword">pw</span>：初始化设置的root用户的密码</span><br><span class="line"><span class="keyword">tag</span>：mysql的版本，不写默认使用最新版</span><br><span class="line">-<span class="keyword">p</span> <span class="number">3306</span>:<span class="number">3306</span>：表示在这个容器中使用<span class="number">3306</span>端口(第二个)映射到本机的端口号也为<span class="number">3306</span>(第一个)</span><br></pre></td></tr></table></figure></p>
-<p>2.安装nginx：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull <span class="variable">$&#123;nginx</span>:<span class="keyword">version</span>&#125;</span><br><span class="line">docker <span class="keyword">run</span> -it -p 80:80 <span class="variable">$&#123;nginx</span>:<span class="keyword">version</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.安装gogs：<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull gogs/gogs</span><br><span class="line">docker <span class="keyword">run</span><span class="bash"> -d -p 3000:3000 gogs/gogs</span></span><br></pre></td></tr></table></figure></p>
+        
+          
+            <p>1.项目跳转：向左跳转<code>ctrl + alt + [</code>，向右跳转<code>ctrl + alt + ]</code>。<br>2.快捷键查找：<code>ctrl + shift + A</code>。<br>3.最近文件：<code>ctrl + E</code>。<br>4.最近浏览：<code>ctrl + alt + 左箭头</code>和<code>ctrl + alt + 右箭头</code>。<br>5.查找类：<code>ctrl + N</code>。<br>6.查找文件：<code>ctrl + shift + N</code>。<br>7.全局查找：<code>ctrl + alt + F</code>。<br>8.列操作：<code>ctrl + alt + shift + J</code>。<br>9.<code>live template</code>模板，可自定义。main函数：psvm；打印：sout；public static final String：psfs等。<br>10.自动校正：<code>alt + enter</code>。<br>11.重构：<code>shift + f6</code>。 </p>
 
+          
+        
       
     </div>
     
@@ -321,32 +322,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/blog/2018/09/14/安装Brook和Shadowsocks/" rel="next" title="安装Brook和Shadowsocks ">
-                <i class="fa fa-chevron-left"></i> 安装Brook和Shadowsocks 
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/09/14/利用枚举类实现单例模式/" rel="prev" title="利用枚举类实现单例模式">
-                利用枚举类实现单例模式 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -356,11 +337,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -368,10 +352,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -569,10 +549,6 @@
   
 
   
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
