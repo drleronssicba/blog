@@ -231,6 +231,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/22/JedisClusterr工具类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lichujun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十仔的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/09/22/JedisClusterr工具类/" itemprop="url">JedisClusterr工具类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-22T14:45:04+08:00">
+                2018-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>JedisClusterr工具类：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">import</span> com.kye.map.common.ConfigurationUtil;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> com.kye.map.entity.conf.RedisConf;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.commons.pool2.impl.GenericObjectPoolConfig;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> redis.clients.jedis.HostAndPort;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> redis.clients.jedis.JedisCluster;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> java.io.IOException;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> java.util.HashSet;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> java.util.List;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于连接redis的工具类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JedisUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> ThreadLocal&lt;JedisCluster&gt; tl = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 连接Redis集群</span></span><br><span class="line"><span class="comment">     * @return 集群连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JedisCluster connRedis()&#123;</span><br><span class="line">        JedisCluster cluster = tl.get();</span><br><span class="line">        <span class="keyword">if</span>(cluster == <span class="literal">null</span>)&#123;</span><br><span class="line">            HashSet&lt;HostAndPort&gt; nodes = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">            List&lt;RedisConf.RedisNodes&gt; redisNodes = ConfigurationUtil.getRedisConf().getNodes();</span><br><span class="line">            <span class="keyword">for</span> (RedisConf.RedisNodes redisNode: redisNodes) &#123;</span><br><span class="line">                nodes.add(<span class="keyword">new</span> HostAndPort(redisNode.getHost(), redisNode.getPort()));</span><br><span class="line">            &#125;</span><br><span class="line">            GenericObjectPoolConfig g = <span class="keyword">new</span> GenericObjectPoolConfig();</span><br><span class="line">            g.setMaxWaitMillis(ConfigurationUtil.getRedisConf().getMaxWaitMillis());</span><br><span class="line">            g.setMaxTotal(ConfigurationUtil.getRedisConf().getMaxTotal());</span><br><span class="line">            g.setMaxIdle(ConfigurationUtil.getRedisConf().getMaxIdle());</span><br><span class="line">            g.setTestOnBorrow(ConfigurationUtil.getRedisConf().isTestOnBorrow());</span><br><span class="line">            g.setTestOnReturn(ConfigurationUtil.getRedisConf().isTestOnReturn());</span><br><span class="line">            g.setTestWhileIdle(ConfigurationUtil.getRedisConf().isTestWhileIdle());</span><br><span class="line">            cluster = <span class="keyword">new</span> JedisCluster(nodes, ConfigurationUtil.getRedisConf().getTimeout(),</span><br><span class="line">                    ConfigurationUtil.getRedisConf().getMaxWaitMillis(),</span><br><span class="line">                    ConfigurationUtil.getRedisConf().getMaxAttemps(),</span><br><span class="line">                    ConfigurationUtil.getRedisConf().getPassword(),</span><br><span class="line">                    g);</span><br><span class="line">            tl.set(cluster);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cluster;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关闭连接</span></span><br><span class="line"><span class="comment">     * @param cluster</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> close(JedisCluster cluster)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cluster!=<span class="literal">null</span>)&#123;</span><br><span class="line">            tl.remove();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                cluster.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/21/MD5加密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1308,130 +1428,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lichujun.gitee.io/blog/blog/2018/09/14/通过枚举成员获取对应的枚举对象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lichujun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十仔的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/09/14/通过枚举成员获取对应的枚举对象/" itemprop="url">通过枚举成员获取对应的枚举对象</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T23:24:57+08:00">
-                2018-09-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>方法一：通过在枚举类中添加方法，遍历枚举类的所有对象进行判断，如下添加getOrderStatusEnum方法：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: lichujun</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2018-08-15</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> OrderStatusEnum &#123;</span><br><span class="line">    New(<span class="number">0</span>, <span class="string">"新订单"</span>),</span><br><span class="line"></span><br><span class="line">    FINISHED(<span class="number">1</span>, <span class="string">"完结"</span>),</span><br><span class="line"></span><br><span class="line">    CANCEL(<span class="number">2</span>, <span class="string">"已取消"</span>),</span><br><span class="line"></span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">    OrderStatusEnum(Integer code, String message) &#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> static OrderStatusEnum getOrderStatusEnum(Integer code) &#123;</span><br><span class="line">        <span class="keyword">for</span> (OrderStatusEnum orderStatusEnum: OrderStatusEnum.values()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (orderStatusEnum.code.equals(code)) &#123;</span><br><span class="line">                <span class="keyword">return</span> orderStatusEnum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>方法二：通过泛型获取枚举对象，避免重复代码。</p>
-<p>(1)CodeEnum接口<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>CodeEnum &#123;</span><br><span class="line">    Integer getCode();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>（2）枚举类实现接口CodeEnum的getCode方法<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: lichujun</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2018-08-15</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">OrderStatusEnum</span> <span class="keyword">implements</span> <span class="title">CodeEnum</span> &#123;</span></span><br><span class="line">    New(<span class="number">0</span>, <span class="string">"新订单"</span>),</span><br><span class="line"></span><br><span class="line">    FINISHED(<span class="number">1</span>, <span class="string">"完结"</span>),</span><br><span class="line"></span><br><span class="line">    CANCEL(<span class="number">2</span>, <span class="string">"已取消"</span>),</span><br><span class="line"></span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">    OrderStatusEnum(Integer code, String message) &#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>(3)编写工具类获取实现了CodeEnum接口的所有枚举类的枚举对象<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T <span class="keyword">extends</span> CodeEnum&gt; T getByCode(Integer code, Class&lt;T&gt; enumClass) &#123;</span><br><span class="line">        <span class="keyword">for</span> (T <span class="keyword">each</span>: enumClass.getEnumConstants()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (code.equals(<span class="keyword">each</span>.getCode())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">each</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1482,7 +1478,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
